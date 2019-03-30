@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace chat_client_wpf
+namespace chat_client_wpf.User
 {
     /// <summary>
-    /// Логика взаимодействия для Window1.xaml
+    /// Логика взаимодействия для User.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class User : Window
     {
-        public Window1()
+        public User()
         {
             InitializeComponent();
         }
