@@ -23,5 +23,6 @@ namespace chat_client_wpf.User
         {
             InitializeComponent();
         }
+        
     }
 }
