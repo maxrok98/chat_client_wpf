@@ -17,55 +17,34 @@ namespace chat_client_wpf.User
             this.view = view;
             this.model = model;
             var mychats = model.user.MyChats();
-            var notmychats = model.user.NotMyChats();
 
-            view.MyChatSelected += OnMyChatSelected;
-            view.NotMyChatSelected += OnNotMyChatSelected;
+            view.ChatSelected += OnMyChatSelected;
             view.UpdateU += OnUpdate;
             view.CreateNewChat += OnCreateNewChat;
             if (mychats != null)
             {
-                view.LoadMyChats(mychats);
-            }
-            if (notmychats != null)
-            {
-                view.LoadNotMyChats(notmychats);
+                view.LoadChats(mychats);
             }
             this.view.ChangeLable(this.model.user.Username);
         }
 
         public void OnMyChatSelected()
         {
-            if (this.view.SelectedMyChat != null)
+            if (this.view.SelectedChat != null)
             {
-                var id = this.view.SelectedMyChat.Id;
+                var id = this.view.SelectedChat.Id;
                 var chat = this.model.user.GetMyById(id);
-                this.view.OpenChat(chat);
-            }
-        }
-        public void OnNotMyChatSelected()
-        {
-            if (this.view.SelectedNotMyChat != null)
-            {
-                var id = this.view.SelectedNotMyChat.Id;
-                var chat = this.model.user.GetNotMyById(id);
                 this.view.OpenChat(chat);
             }
         }
         public void OnUpdate()
         {
             model.UpdateMyChat();
-            model.UpdateNotMyChat();
 
             var mychats = model.user.MyChats();
-            var notmychats = model.user.NotMyChats();
             if (mychats != null)
             {
-                view.LoadMyChats(mychats);
-            }
-            if (notmychats != null)
-            {
-                view.LoadNotMyChats(notmychats);
+                view.LoadChats(mychats);
             }
         }
         public void OnCreateNewChat()

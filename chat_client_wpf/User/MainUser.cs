@@ -34,24 +34,5 @@ namespace chat_client_wpf.User
         {
             return mychat;
         }
-
-        public List<Chat> notmychat = new List<Chat>();
-        public void AddNotMyChat(Chat chat)
-        {
-            notmychat.Add(chat);
-        }
-        public Chat GetNotMyById(int id)
-        {
-            foreach (Chat ch in notmychat)
-            {
-                if (ch.Id == id)
-                    return ch;
-            }
-            return null;
-        }
-        public List<Chat> NotMyChats()
-        {
-            return notmychat;
-        }
     }
 }

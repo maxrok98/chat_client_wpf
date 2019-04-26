@@ -42,7 +42,7 @@ namespace chat_client_wpf.Login
         {
             user = new User.User();
             usermodel = new User.Model(n);
-            //userpresenter = new User.Presenter(user, usermodel);
+            userpresenter = new User.Presenter(user, usermodel);
             user.Show();
         }
 

@@ -14,14 +14,27 @@
         Background="AliceBlue"
         FontFamily="{DynamicResource MaterialDesignFont}"
         MinWidth="600">
-    <Grid>
+    <materialDesign:DialogHost CloseOnClickAway="True">
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel Margin="20">
+                <Label Content="Create new chat" FontSize="20"/>
+                <TextBlock Text="Name of chat" />
+                <TextBox Margin="10" Width="150" Name="NewChat"/>
+                <TextBlock Text="Name of user"/>
+                <TextBox Margin="10" Width="150" Name="UserForNewChat"/>
+
+                <Button Content="Create" Click="Button_Click"/>
+            </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+        
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition MaxWidth="200" />
             <ColumnDefinition  />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -32,7 +45,7 @@
                 <materialDesign:PopupBox
       DockPanel.Dock="Right"
       PlacementMode="BottomAndAlignRightEdges">
-                    <ListBox>
+                    <ListBox >
                         <ListBoxItem>
                             Hello World
                         </ListBoxItem>
@@ -50,7 +63,7 @@
         Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
                     <TextBlock
         VerticalAlignment="Center"
-        Margin="16 0 0 0">
+        Margin="16 0 0 0" Name="Label">
       Material Design In XAML Toolkit
                     </TextBlock>
                 </StackPanel>
@@ -67,50 +80,52 @@
                 <RowDefinition
                     Height="Auto" />
             </Grid.RowDefinitions>
-            <ListView Grid.Row="0" Margin="0 70 0 0">
-                <ListViewItem>
-                    Hello
-                </ListViewItem>
-                <ListViewItem>
-                    World
-                </ListViewItem>
-                <ListViewItem>
-                    :)
-                </ListViewItem>
-            </ListView>
-            <materialDesign:PopupBox
-    Grid.Row="1"
-    Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-    PlacementMode="LeftAndAlignMiddles"
-    UnfurlOrientation="Horizontal"
-    ToolTip="Manage items"
-    Margin="0 0 10 10"
-    HorizontalAlignment="Right"
-    VerticalAlignment="Bottom">
+                <ListView Grid.Row="0" Margin="0 70 0 0"  x:Name="ChatsList" ItemsSource="{Binding}" SelectionChanged="ChatsList_SelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            
+                <materialDesign:PopupBox
+                    Grid.Row="1"
+                    Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                    PlacementMode="LeftAndAlignMiddles"
+                    UnfurlOrientation="Horizontal"
+                    ToolTip="Manage items"
+                    Margin="0 0 10 10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
                 <StackPanel
-      Orientation="Horizontal">
-                    <Button
-        ToolTip="Add an item"
-        Command="{Binding AddCommand}">
-                        <Path
-          Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-          Stretch="Uniform"
-          Width="15"
-          Height="15"
-          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
-                    </Button>
-                    <Button
-        ToolTip="Remove selected item"
-        Command="{Binding RemoveSelectedItemCommand}">
-                        <Path
-          Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
-          Stretch="Uniform"
-          Width="15"
-          Height="15"
-          Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
-                    </Button>
+                     Orientation="Horizontal">
+                    
+                        <Button
+                    ToolTip="Add an item"
+                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                            <Path
+                      Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                      Stretch="Uniform"
+                      Width="15"
+                      Height="15"
+                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                        </Button>
+                        <Button
+                    ToolTip="Remove selected item"
+                    Command="{Binding RemoveSelectedItemCommand}">
+                            <Path
+                      Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                      Stretch="Uniform"
+                      Width="15"
+                      Height="15"
+                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                        </Button>
+                    
                 </StackPanel>
-            </materialDesign:PopupBox>
+                </materialDesign:PopupBox>
+            
+            
         </Grid>
     </Grid>
+    </materialDesign:DialogHost>
 </Window>

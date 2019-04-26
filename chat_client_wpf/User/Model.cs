@@ -26,8 +26,6 @@ namespace chat_client_wpf.User
             }
             user = new MainUser(n, name);
             UpdateMyChat();
-            UpdateNotMyChat();
-
         }
         public void UpdateMyChat()
         {
@@ -44,11 +42,7 @@ namespace chat_client_wpf.User
                     }
                 }
             }
-        }
-        public void UpdateNotMyChat()
-        {
-            user.notmychat = new List<Chat>();
-            DataSet ds = sql.SqlQuerySelect($"select id, name from chats where addedid = '{n}'");
+            ds = sql.SqlQuerySelect($"select id, name from chats where addedid = '{n}'");
             if (ds != null)
             {
                 foreach (DataTable dt in ds.Tables)
@@ -56,10 +50,11 @@ namespace chat_client_wpf.User
                     foreach (DataRow row in dt.Rows)
                     {
                         Chat chat = new Chat(Convert.ToInt32(row[0]), Convert.ToString(row[1]));
-                        user.AddNotMyChat(chat);
+                        user.AddMyChat(chat);
                     }
                 }
             }
         }
+
     }
 }
