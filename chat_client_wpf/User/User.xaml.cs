@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,25 @@ namespace chat_client_wpf.User
         public event Action ChatSelected;
         public event Action UpdateU;
         public event Action CreateNewChat;
+
+
+        public ObservableCollection<Message> list { get; set; }
+
+        public Message message
+        {
+            get { return (Message)GetValue(ChatProperty); }
+            set { SetValue(ChatProperty, value); }
+        }
+
+        public static readonly DependencyProperty ChatProperty = DependencyProperty.Register("message", typeof(Message), typeof(ItemsControl));
+
         public User()
         {
+            
             InitializeComponent();
+            list = new ObservableCollection<Message>();
+            Messages.ItemsSource = list;
+            
         }
 
         public List<Chat> Chats
@@ -37,7 +54,6 @@ namespace chat_client_wpf.User
         {
             get { return ChatsList.SelectedItem as Chat; }
         }
-
 
 
         public void ChangeLable(string name)
@@ -85,6 +101,13 @@ namespace chat_client_wpf.User
         private void ChatsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ChatSelected.Invoke();
+        }
+
+        public void LoadMessages(ObservableCollection<Message> list)
+        {
+            this.list = list;
+            Messages.ItemsSource = this.list;
+            
         }
     }
 }

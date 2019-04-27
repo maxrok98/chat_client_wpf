@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace chat_client_wpf.User
         }
 
         public List<Chat> mychat = new List<Chat>();
+        public ObservableCollection<Message> Messages { get; set; }
         public void AddMyChat(Chat chat)
         {
             mychat.Add(chat);

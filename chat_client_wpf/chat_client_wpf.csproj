@@ -96,6 +96,7 @@
     <Compile Include="User\Chat.cs" />
     <Compile Include="User\IUser.cs" />
     <Compile Include="User\MainUser.cs" />
+    <Compile Include="User\Message.cs" />
     <Compile Include="User\Model.cs" />
     <Compile Include="User\Presenter.cs" />
     <Compile Include="User\User.xaml.cs">

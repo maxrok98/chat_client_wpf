@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="User" Height="450" Width="600"
+        Title="User"
+        Height="450"
+        Width="600"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -14,118 +16,207 @@
         Background="AliceBlue"
         FontFamily="{DynamicResource MaterialDesignFont}"
         MinWidth="600">
+    <!--<Window.Resources>
+        <Style x:Key="ChooseColor"
+               TargetType="ToggleButton">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=MainUser}"
+                             Value="True">
+                    <Setter Property="Background"
+                            Value="Red" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=MainUser}"
+                             Value="False">
+                    <Setter Property="Background"
+                            Value="Green" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>-->
     <materialDesign:DialogHost CloseOnClickAway="True">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="20">
-                <Label Content="Create new chat" FontSize="20"/>
+                <Label Content="Create new chat"
+                       FontSize="20" />
                 <TextBlock Text="Name of chat" />
-                <TextBox Margin="10" Width="150" Name="NewChat"/>
-                <TextBlock Text="Name of user"/>
-                <TextBox Margin="10" Width="150" Name="UserForNewChat"/>
+                <TextBox Margin="10"
+                         Width="150"
+                         Name="NewChat" />
+                <TextBlock Text="Name of user" />
+                <TextBox Margin="10"
+                         Width="150"
+                         Name="UserForNewChat" />
 
-                <Button Content="Create" Click="Button_Click"/>
+                <Button Content="Create"
+                        Click="Button_Click" />
             </StackPanel>
         </materialDesign:DialogHost.DialogContent>
-        
+
         <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MaxWidth="200" />
-            <ColumnDefinition  />
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <materialDesign:ColorZone
-  Mode="Inverted"
-  Padding="16" Grid.ColumnSpan="3">
-            <DockPanel>
-                <materialDesign:PopupBox
-      DockPanel.Dock="Right"
-      PlacementMode="BottomAndAlignRightEdges">
-                    <ListBox >
-                        <ListBoxItem>
-                            Hello World
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            Nice Popup
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            Goodbye.
-                        </ListBoxItem>
-                    </ListBox>
-                </materialDesign:PopupBox>
-                <StackPanel
-      Orientation="Horizontal">
-                    <ToggleButton
-        Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
-                    <TextBlock
-        VerticalAlignment="Center"
-        Margin="16 0 0 0" Name="Label">
-      Material Design In XAML Toolkit
-                    </TextBlock>
-                </StackPanel>
-            </DockPanel>
-        </materialDesign:ColorZone>
-
-        
-
-        <Grid 
-            MinWidth="200"  Grid.Column="0" Grid.RowSpan="3" >
             <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="*" />
-                <RowDefinition
-                    Height="Auto" />
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition />
             </Grid.RowDefinitions>
-                <ListView Grid.Row="0" Margin="0 70 0 0"  x:Name="ChatsList" ItemsSource="{Binding}" SelectionChanged="ChatsList_SelectionChanged">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="200" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <materialDesign:ColorZone Mode="Inverted"
+                                      Padding="16"
+                                      Grid.ColumnSpan="3"
+                                      Background="#E65100">
+                <DockPanel>
+                    <materialDesign:PopupBox DockPanel.Dock="Right"
+                                             PlacementMode="BottomAndAlignRightEdges">
+                        <ListBox>
+                            <ListBoxItem>
+                                Hello World
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                Nice Popup
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                Goodbye.
+                            </ListBoxItem>
+                        </ListBox>
+                    </materialDesign:PopupBox>
+                    <StackPanel Orientation="Vertical">
+
+                        <TextBlock VerticalAlignment="Center"
+                                   Margin="16 0 0 0"
+                                   Name="Label"
+                                   FontSize="30"
+                                   HorizontalAlignment="Center">
+      Material Design In XAML Toolkit
+                        </TextBlock>
+                    </StackPanel>
+                </DockPanel>
+            </materialDesign:ColorZone>
+
+
+
+            <Grid MinWidth="200"
+                  Grid.Column="0"
+                  Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ListView Grid.Row="0"
+                          Margin="0 70 0 0"
+                          x:Name="ChatsList"
+                          ItemsSource="{Binding}"
+                          SelectionChanged="ChatsList_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Name}" />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            
-                <materialDesign:PopupBox
-                    Grid.Row="1"
-                    Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-                    PlacementMode="LeftAndAlignMiddles"
-                    UnfurlOrientation="Horizontal"
-                    ToolTip="Manage items"
-                    Margin="0 0 10 10"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom">
-                <StackPanel
-                     Orientation="Horizontal">
-                    
-                        <Button
-                    ToolTip="Add an item"
-                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                            <Path
-                      Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                      Stretch="Uniform"
-                      Width="15"
-                      Height="15"
-                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+
+                <materialDesign:PopupBox Grid.Row="1"
+                                         Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                         PlacementMode="LeftAndAlignMiddles"
+                                         UnfurlOrientation="Horizontal"
+                                         ToolTip="Manage items"
+                                         Margin="0 0 10 10"
+                                         HorizontalAlignment="Right"
+                                         VerticalAlignment="Bottom"
+                                         Background="#FB8C00">
+                    <StackPanel Orientation="Horizontal">
+
+                        <Button ToolTip="Add an item"
+                                Background="#FB8C00"
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                            <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                                  Stretch="Uniform"
+                                  Width="15"
+                                  Height="15"
+                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
                         </Button>
-                        <Button
-                    ToolTip="Remove selected item"
-                    Command="{Binding RemoveSelectedItemCommand}">
-                            <Path
-                      Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
-                      Stretch="Uniform"
-                      Width="15"
-                      Height="15"
-                      Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                        <Button Background="#FB8C00"
+                                ToolTip="Remove selected item"
+                                Command="{Binding RemoveSelectedItemCommand}">
+                            <Path Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                                  Stretch="Uniform"
+                                  Width="15"
+                                  Height="15"
+                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
                         </Button>
-                    
-                </StackPanel>
+
+                    </StackPanel>
                 </materialDesign:PopupBox>
+
+
+            </Grid>
             
-            
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              Grid.Column="1"
+                              Grid.Row="0"
+                              Grid.ColumnSpan="2"
+                              Grid.RowSpan="2"
+                              Margin="0 70 0 0">
+                    <ItemsControl ItemsSource="{Binding Items2}"
+                                  Grid.IsSharedSizeScope="True"
+                                  Name="Messages">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border x:Name="Border"
+                                        Padding="8"
+                                        BorderThickness="0 0 0 1"
+                                        BorderBrush="{DynamicResource MaterialDesignDivider}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition SharedSizeGroup="Checkerz" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                    <ToggleButton VerticalAlignment="Center"
+                                                  IsChecked="{Binding IsSelected}"
+                                                  Style="{StaticResource MaterialDesignActionLightToggleButton}"
+                                                  Background="Yellow">
+                                        <!--<Style TargetType="{x:Type ToggleButton}">
+                                            <Setter Property="Background"
+                                                    Value="Blue" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding MainUser}"
+                                                             Value="true">
+                                                    <Setter Property="Background"
+                                                            Value="Yellow" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding MainUser}">
+                                                    <Setter Property="Background" Value="Blue"
+                                                            x:Name="ColorForUser" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>-->
+                                    </ToggleButton>
+
+                                    <StackPanel Margin="8 0 0 0"
+                                                    Grid.Column="1"
+                                                    Orientation="Vertical">
+                                            <TextBlock FontWeight="Bold"
+                                                       Text="{Binding Name, Mode=TwoWay}" />
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Text="{Binding Description, Mode=TwoWay}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected}"
+                                                 Value="True">
+                                        <Setter TargetName="Border"
+                                                Property="Background"
+                                                Value="{DynamicResource MaterialDesignSelection}" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
         </Grid>
-    </Grid>
     </materialDesign:DialogHost>
 </Window>

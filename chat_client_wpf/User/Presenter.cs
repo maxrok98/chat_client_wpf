@@ -12,6 +12,7 @@ namespace chat_client_wpf.User
     {
         public IUser view;
         public Model model;
+
         public Presenter(IUser view, Model model)
         {
             this.view = view;
@@ -34,7 +35,9 @@ namespace chat_client_wpf.User
             {
                 var id = this.view.SelectedChat.Id;
                 var chat = this.model.user.GetMyById(id);
-                this.view.OpenChat(chat);
+                //this.view.OpenChat(chat);
+                model.LoadMessages(chat);
+                view.LoadMessages(model.user.Messages);
             }
         }
         public void OnUpdate()
@@ -63,5 +66,6 @@ namespace chat_client_wpf.User
                 MessageBox.Show("New chat was created");
             }
         }
+        
     }
 }
