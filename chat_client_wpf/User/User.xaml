@@ -57,7 +57,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition />
+                <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MaxWidth="200" />
@@ -216,7 +216,47 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
+            <Grid Grid.Column="1"
+                  Grid.Row="3"
+                  Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <TextBox TextWrapping="Wrap"
+                         MinWidth="280"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         SpellCheck.IsEnabled="True"
+                         materialDesign:HintAssist.Hint="Message"
+                         Width="Auto"
+                         Margin="10">
+                </TextBox>
+                <Button Content="Send"
+                        HorizontalAlignment="Right"
+                        Background="Blue" 
+                        Grid.Column="2"
+                        Margin="15"/>
 
+            </Grid>
+            <!--<DockPanel  Background="Green"
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        Name="Container">
+                <TextBox TextWrapping="Wrap"
+                         
+                         MinWidth="280"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         SpellCheck.IsEnabled="True"
+                         materialDesign:HintAssist.Hint="Multiline text"
+                         Width="Auto"
+                         Margin="10">
+                </TextBox>
+                <Button Content="Send" HorizontalAlignment="Right" Background="Blue"/>
+
+            </DockPanel>-->
         </Grid>
     </materialDesign:DialogHost>
 </Window>
