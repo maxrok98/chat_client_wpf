@@ -173,11 +173,11 @@
                                             <ColumnDefinition SharedSizeGroup="Checkerz" />
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
-                                    <ToggleButton VerticalAlignment="Center"
+                                    <!--<ToggleButton VerticalAlignment="Center"
                                                   IsChecked="{Binding IsSelected}"
                                                   Style="{StaticResource MaterialDesignActionLightToggleButton}"
                                                   Background="Yellow">
-                                        <!--<Style TargetType="{x:Type ToggleButton}">
+                                        --><!--<Style TargetType="{x:Type ToggleButton}">
                                             <Setter Property="Background"
                                                     Value="Blue" />
                                             <Style.Triggers>
@@ -191,17 +191,50 @@
                                                             x:Name="ColorForUser" />
                                                 </DataTrigger>
                                             </Style.Triggers>
-                                        </Style>-->
-                                    </ToggleButton>
+                                        </Style>--><!--
+                                    </ToggleButton>-->
 
                                     <StackPanel Margin="8 0 0 0"
                                                     Grid.Column="1"
-                                                    Orientation="Vertical">
-                                            <TextBlock FontWeight="Bold"
-                                                       Text="{Binding Name, Mode=TwoWay}" />
-                                            <TextBlock TextWrapping="Wrap"
-                                                       Text="{Binding Description, Mode=TwoWay}" />
-                                        </StackPanel>
+                                                    Orientation="Vertical"
+                                                    >
+
+                                        <TextBlock FontWeight="Bold"
+                                                   Text="{Binding Name, Mode=TwoWay}"
+                                                   >
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment"
+                                                            Value="Left"></Setter>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding MainUser}"
+                                                                 Value="True">
+                                                            <Setter Property="HorizontalAlignment"
+                                                                    Value="Right" />
+                                                            
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <TextBlock TextWrapping="Wrap"
+                                                   Text="{Binding Description, Mode=TwoWay}">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment"
+                                                            Value="Left"></Setter>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding MainUser}"
+                                                                     Value="True">
+                                                            <Setter Property="HorizontalAlignment"
+                                                                    Value="Right" />
+
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </StackPanel>
                                     </Grid>
                                 </Border>
                                 <DataTemplate.Triggers>
@@ -230,13 +263,18 @@
                          SpellCheck.IsEnabled="True"
                          materialDesign:HintAssist.Hint="Message"
                          Width="Auto"
-                         Margin="10">
+                         Margin="10"
+                         Name="MessageField">
+
                 </TextBox>
                 <Button Content="Send"
                         HorizontalAlignment="Right"
                         Background="Blue" 
                         Grid.Column="2"
-                        Margin="15"/>
+                        Margin="15"
+                        Name="SendButton"
+                        Click="SendButton_Click"/>
+                        
 
             </Grid>
             <!--<DockPanel  Background="Green"

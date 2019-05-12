@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chat_client_wpf", "chat_client_wpf\chat_client_wpf.csproj", "{15DA1421-691D-4DB6-872D-5D8F5D1738C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiments", "Experiments\Experiments.csproj", "{6608DA87-77CC-422D-8C19-C397B3C84D86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsymetricEncrypt", "AsymetricEncrypt\AsymetricEncrypt.csproj", "{8A8316D0-EE75-426D-AC6A-31BEF1E453D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{15DA1421-691D-4DB6-872D-5D8F5D1738C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15DA1421-691D-4DB6-872D-5D8F5D1738C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15DA1421-691D-4DB6-872D-5D8F5D1738C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6608DA87-77CC-422D-8C19-C397B3C84D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6608DA87-77CC-422D-8C19-C397B3C84D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6608DA87-77CC-422D-8C19-C397B3C84D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6608DA87-77CC-422D-8C19-C397B3C84D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8316D0-EE75-426D-AC6A-31BEF1E453D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8316D0-EE75-426D-AC6A-31BEF1E453D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8316D0-EE75-426D-AC6A-31BEF1E453D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8316D0-EE75-426D-AC6A-31BEF1E453D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

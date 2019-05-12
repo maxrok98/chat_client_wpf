@@ -8,10 +8,12 @@ using Npgsql;
 
 namespace chat_client_wpf
 {
-    class SqlMachine
+    public class SqlMachine
     {
-        string connstring = String.Format("Server=ec2-54-225-110-156.compute-1.amazonaws.com;Port=5432;" +
-                     "User Id=kegmwqmmzhiety;Password=e87334ea834578f6b7fc43f1fb501fc3e70e2f6e0bcafa797750844d15706a09;Database=d5eem7ifccga82;sslmode=Require;Trust Server Certificate=true;");
+        string connstring = String.Format("Server=165.22.240.183;Port=5432;" +
+                     "User Id=postgres;Password=passwordforchat;Database=postgres;sslmode=Require;Trust Server Certificate=true;");
+        //string connstring = String.Format("Server=ec2-54-225-110-156.compute-1.amazonaws.com;Port=5432;" +
+                     //"User Id=kegmwqmmzhiety;Password=e87334ea834578f6b7fc43f1fb501fc3e70e2f6e0bcafa797750844d15706a09;Database=d5eem7ifccga82;sslmode=Require;Trust Server Certificate=true;");
         public SqlMachine() { }
         public DataSet SqlQuerySelect(string query)
         {

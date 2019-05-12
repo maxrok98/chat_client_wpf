@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace chat_client_wpf.User
 {
-    class MainUser
+    public class MainUser
     {
         public int Id { get; private set; }
         public string Username { get; private set; }

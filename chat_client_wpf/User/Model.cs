@@ -4,12 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Quobject.SocketIoClientDotNet.Client;
+using System.Windows;
 
 namespace chat_client_wpf.User
 {
-    class Model
+    public class Model
     {
+        public event Action ReceiveMessage;
+        Socket socket = IO.Socket("http://165.22.240.183:5000");
         public MainUser user;
+        public Chat chat;
+        public Message message;
         public SqlMachine sql = new SqlMachine();
         int n = 0;
         public Model(int n)
@@ -26,6 +33,36 @@ namespace chat_client_wpf.User
             }
             user = new MainUser(n, name);
             UpdateMyChat();
+            SocketIOManager();
+        }
+        public void SocketIOManager()
+        {
+            socket.On(Socket.EVENT_CONNECT, () =>
+            {
+
+                //Console.WriteLine("Connected");
+
+            });
+            socket.On("return message", (data) =>
+            {
+                
+                //var fo = new { user_id = 0, user = "", text = "", chat_id = 0 };
+                //var m = JsonConvert.DeserializeAnonymousType(data as string, fo);
+                string d = data.ToString();
+                ForReceive f = JsonConvert.DeserializeObject<ForReceive>(d);
+                if(f.chat_id == chat.Id)
+                {
+                    message = new Message(f.user, f.text, false);
+
+                    if(f.user_id == user.Id)
+                    {
+                        message.MainUser = true;
+                    }
+                    ReceiveMessage(); 
+                }
+
+
+            });
         }
         public void UpdateMyChat()
         {
@@ -101,6 +138,33 @@ namespace chat_client_wpf.User
                 }
             }
         }
+        public void SendMessage(Chat chat, string text)
+        {
+            
+            ForSend f = new ForSend();
+            f.user_id = user.Id;
+            f.user = user.Username;
+            f.chat_id = chat.Id;
+            f.text = text;
+            string json = JsonConvert.SerializeObject(f);
+            socket.Emit("send message", json);
+        }
+        
 
+    }
+    public class ForSend
+    {
+        public int user_id;
+        public string user;
+        public int chat_id;
+        public string text;
+
+    }
+    public class ForReceive
+    {
+        public int user_id;
+        public string user;
+        public string text;
+        public int chat_id;
     }
 }

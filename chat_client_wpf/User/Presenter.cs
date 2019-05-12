@@ -22,6 +22,8 @@ namespace chat_client_wpf.User
             view.ChatSelected += OnMyChatSelected;
             view.UpdateU += OnUpdate;
             view.CreateNewChat += OnCreateNewChat;
+            view.SendMessage += OnSendMessage;
+            model.ReceiveMessage += OnReceiveMessage;
             if (mychats != null)
             {
                 view.LoadChats(mychats);
@@ -37,6 +39,7 @@ namespace chat_client_wpf.User
                 var chat = this.model.user.GetMyById(id);
                 //this.view.OpenChat(chat);
                 model.LoadMessages(chat);
+                model.chat = chat;
                 view.LoadMessages(model.user.Messages);
             }
         }
@@ -50,7 +53,7 @@ namespace chat_client_wpf.User
                 view.LoadChats(mychats);
             }
         }
-        public void OnCreateNewChat()
+        public void OnCreateNewChat()    //переробити
         {
             string[] chat = view.LoadNewChat();
             if (model.sql.SqlQuerySelect($"select * from users where username = '{chat[1]}'") == null)
@@ -64,6 +67,21 @@ namespace chat_client_wpf.User
                 int added = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
                 model.sql.SqlQueryInsert1("INSERT INTO chats (name, creatorid, addedid) VALUES (@p, @p1, @p2)", chat[0], model.user.Id, added);
                 MessageBox.Show("New chat was created");
+            }
+        }
+        public void OnReceiveMessage()
+        {
+            view.AddNewMessage(model.message);
+        }
+        public void OnSendMessage()
+        {
+            if (view.SelectedChat != null)
+            {
+                model.SendMessage(view.SelectedChat, view.Message());
+            }
+            else
+            {
+                MessageBox.Show("You have to choose chat!");
             }
         }
         

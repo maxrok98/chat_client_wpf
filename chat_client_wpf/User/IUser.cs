@@ -13,6 +13,7 @@ namespace chat_client_wpf.User
         event Action ChatSelected;
         event Action UpdateU;
         event Action CreateNewChat;
+        event Action SendMessage;
         
 
 
@@ -25,6 +26,8 @@ namespace chat_client_wpf.User
         void LoadChats(List<Chat> mychats);
         void OpenChat(Chat chat);
         string[] LoadNewChat();
+        string Message();
+        void AddNewMessage(Message message);
         void Close();
     }
 }

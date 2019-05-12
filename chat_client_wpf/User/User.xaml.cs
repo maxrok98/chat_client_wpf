@@ -23,6 +23,7 @@ namespace chat_client_wpf.User
         public event Action ChatSelected;
         public event Action UpdateU;
         public event Action CreateNewChat;
+        public event Action SendMessage;
 
 
         public ObservableCollection<Message> list { get; set; }
@@ -108,6 +109,26 @@ namespace chat_client_wpf.User
             this.list = list;
             Messages.ItemsSource = this.list;
             
+        }
+
+        public void AddNewMessage(Message message)
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                this.list.Add(message);
+                
+            });
+        }
+
+        private void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            SendMessage.Invoke();
+        }
+        public string Message()
+        {
+            string m = MessageField.Text;
+            MessageField.Text = string.Empty;
+            return m;
         }
     }
 }
