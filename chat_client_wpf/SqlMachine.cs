@@ -5,16 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+using System.Configuration;
 
 namespace chat_client_wpf
 {
     public class SqlMachine
     {
-        string connstring = String.Format("Server=165.22.240.183;Port=5432;" +
-                     "User Id=postgres;Password=passwordforchat;Database=postgres;sslmode=Require;Trust Server Certificate=true;");
-        //string connstring = String.Format("Server=ec2-54-225-110-156.compute-1.amazonaws.com;Port=5432;" +
-                     //"User Id=kegmwqmmzhiety;Password=e87334ea834578f6b7fc43f1fb501fc3e70e2f6e0bcafa797750844d15706a09;Database=d5eem7ifccga82;sslmode=Require;Trust Server Certificate=true;");
+        public static SqlMachine instance;
+        string connstring = String.Format(ConfigurationManager.AppSettings["DB1"]);
+                     
         public SqlMachine() { }
+        public static SqlMachine getInstance()
+        {
+            if (instance == null)
+                instance = new SqlMachine();
+            return instance;
+        }
         public DataSet SqlQuerySelect(string query)
         {
             NpgsqlConnection conn = new NpgsqlConnection(connstring);
@@ -54,6 +60,16 @@ namespace chat_client_wpf
             }*/
 
 
+        }
+        public void Delete(string query)
+        {
+            NpgsqlConnection conn = new NpgsqlConnection(connstring);
+            conn.Open();
+            string sql = query;
+
+            NpgsqlCommand da = new NpgsqlCommand(sql, conn);
+            da.ExecuteNonQuery();
+            conn.Close();
         }
         public void SqlQueryInsert(string query, params string[] par)
         {

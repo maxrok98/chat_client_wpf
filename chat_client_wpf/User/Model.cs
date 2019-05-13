@@ -7,20 +7,23 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Quobject.SocketIoClientDotNet.Client;
 using System.Windows;
+using System.Configuration;
 
 namespace chat_client_wpf.User
 {
     public class Model
     {
         public event Action ReceiveMessage;
-        Socket socket = IO.Socket("http://165.22.240.183:5000");
+        Socket socket = IO.Socket(ConfigurationManager.AppSettings["Socket1"]);
         public MainUser user;
         public Chat chat;
         public Message message;
-        public SqlMachine sql = new SqlMachine();
+        public SqlMachine sql = SqlMachine.getInstance();
         int n = 0;
-        public Model(int n)
+        ISend typesend;
+        public Model(int n, ISend send)
         {
+            this.typesend = send;
             this.n = n;
             DataSet ds = sql.SqlQuerySelect($"select username from users where id = '{n}'");
             string name = "";
@@ -43,11 +46,9 @@ namespace chat_client_wpf.User
                 //Console.WriteLine("Connected");
 
             });
+
             socket.On("return message", (data) =>
             {
-                
-                //var fo = new { user_id = 0, user = "", text = "", chat_id = 0 };
-                //var m = JsonConvert.DeserializeAnonymousType(data as string, fo);
                 string d = data.ToString();
                 ForReceive f = JsonConvert.DeserializeObject<ForReceive>(d);
                 if(f.chat_id == chat.Id)
@@ -60,8 +61,6 @@ namespace chat_client_wpf.User
                     }
                     ReceiveMessage(); 
                 }
-
-
             });
         }
         public void UpdateMyChat()
@@ -90,6 +89,21 @@ namespace chat_client_wpf.User
                         user.AddMyChat(chat);
                     }
                 }
+            }
+        }
+        public void CreateNewChat(string[] chat)
+        {
+            if (sql.SqlQuerySelect($"select * from users where username = '{chat[1]}'") == null)
+            {
+                MessageBox.Show("This user does not exist");
+            }
+            else
+            {
+                DataSet ds = sql.SqlQuerySelect($"select * from users where username = '{chat[1]}'");
+
+                int added = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+                sql.SqlQueryInsert1("INSERT INTO chats (name, creatorid, addedid) VALUES (@p, @p1, @p2)", chat[0], user.Id, added);
+                MessageBox.Show("New chat was created");
             }
         }
         public void LoadMessages(Chat chat)
@@ -138,6 +152,12 @@ namespace chat_client_wpf.User
                 }
             }
         }
+
+        public void DeleteChat(Chat chat)
+        {
+            sql.Delete($"delete from \"chats\" where \"id\" = {chat.Id}");
+            UpdateMyChat();
+        }
         public void SendMessage(Chat chat, string text)
         {
             
@@ -146,8 +166,7 @@ namespace chat_client_wpf.User
             f.user = user.Username;
             f.chat_id = chat.Id;
             f.text = text;
-            string json = JsonConvert.SerializeObject(f);
-            socket.Emit("send message", json);
+            typesend.send(socket, f);
         }
         
 

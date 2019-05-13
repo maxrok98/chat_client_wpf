@@ -24,6 +24,7 @@ namespace chat_client_wpf.User
         public event Action UpdateU;
         public event Action CreateNewChat;
         public event Action SendMessage;
+        public event Action DeleteChat;
 
 
         public ObservableCollection<Message> list { get; set; }
@@ -86,6 +87,7 @@ namespace chat_client_wpf.User
         {
             if (CreateNewChat != null)
                 CreateNewChat();
+            LoadChats(null);
         }
 
         private void ChatsList_Selected(object sender, RoutedEventArgs e)
@@ -122,13 +124,31 @@ namespace chat_client_wpf.User
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            SendMessage.Invoke();
+            if (SelectedChat != null)
+            {
+                if (MessageField.Text != "")
+                    SendMessage.Invoke();
+            }
+            else
+            {
+                MessageBox.Show("You have to choose chat!");
+            }
         }
         public string Message()
         {
             string m = MessageField.Text;
             MessageField.Text = string.Empty;
             return m;
+        }
+
+        private void Reload_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateU.Invoke();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteChat.Invoke();
         }
     }
 }

@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="User"
         Height="450"
-        Width="600"
+        Width="650"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -15,7 +15,8 @@
         TextOptions.TextRenderingMode="Auto"
         Background="AliceBlue"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        MinWidth="600">
+        MinWidth="650"
+        MinHeight="450">
     <!--<Window.Resources>
         <Style x:Key="ChooseColor"
                TargetType="ToggleButton">
@@ -60,7 +61,7 @@
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MaxWidth="200" />
+                <ColumnDefinition MaxWidth="250" />
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -128,6 +129,14 @@
                                          Background="#FB8C00">
                     <StackPanel Orientation="Horizontal">
 
+                        <Button ToolTip="Reload"
+                                Background="#FB8C00"
+                                Name="Reload"
+                                Click="Reload_Click">
+                            <materialDesign:PackIcon Kind="Reload" />
+                            
+                        </Button>
+                        
                         <Button ToolTip="Add an item"
                                 Background="#FB8C00"
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
@@ -139,7 +148,8 @@
                         </Button>
                         <Button Background="#FB8C00"
                                 ToolTip="Remove selected item"
-                                Command="{Binding RemoveSelectedItemCommand}">
+                                Name="Delete"
+                                Click="Delete_Click">
                             <Path Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
                                   Stretch="Uniform"
                                   Width="15"
@@ -267,14 +277,21 @@
                          Name="MessageField">
 
                 </TextBox>
-                <Button Content="Send"
+                
+
+                <Button Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                        ToolTip="Send"
+                        Height="40"
+                        Width="40"
                         HorizontalAlignment="Right"
-                        Background="Blue" 
+                        Background="Blue"
                         Grid.Column="2"
                         Margin="15"
                         Name="SendButton"
-                        Click="SendButton_Click"/>
-                        
+                        Click="SendButton_Click">
+                    <materialDesign:PackIcon Kind="Send" />
+                </Button>
+
 
             </Grid>
             <!--<DockPanel  Background="Green"

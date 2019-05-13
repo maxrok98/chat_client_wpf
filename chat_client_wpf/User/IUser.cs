@@ -14,6 +14,7 @@ namespace chat_client_wpf.User
         event Action UpdateU;
         event Action CreateNewChat;
         event Action SendMessage;
+        event Action DeleteChat;
         
 
 

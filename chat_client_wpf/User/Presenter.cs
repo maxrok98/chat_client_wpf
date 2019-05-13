@@ -24,6 +24,7 @@ namespace chat_client_wpf.User
             view.CreateNewChat += OnCreateNewChat;
             view.SendMessage += OnSendMessage;
             model.ReceiveMessage += OnReceiveMessage;
+            view.DeleteChat += OnDeleteChat;
             if (mychats != null)
             {
                 view.LoadChats(mychats);
@@ -52,22 +53,12 @@ namespace chat_client_wpf.User
             {
                 view.LoadChats(mychats);
             }
+            view.LoadMessages(null);
         }
-        public void OnCreateNewChat()    //переробити
+        public void OnCreateNewChat()
         {
-            string[] chat = view.LoadNewChat();
-            if (model.sql.SqlQuerySelect($"select * from users where username = '{chat[1]}'") == null)
-            {
-                MessageBox.Show("This user does not exist");
-            }
-            else
-            {
-                DataSet ds = model.sql.SqlQuerySelect($"select * from users where username = '{chat[1]}'");
-
-                int added = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
-                model.sql.SqlQueryInsert1("INSERT INTO chats (name, creatorid, addedid) VALUES (@p, @p1, @p2)", chat[0], model.user.Id, added);
-                MessageBox.Show("New chat was created");
-            }
+            model.CreateNewChat(view.LoadNewChat());
+            OnUpdate();
         }
         public void OnReceiveMessage()
         {
@@ -75,14 +66,13 @@ namespace chat_client_wpf.User
         }
         public void OnSendMessage()
         {
-            if (view.SelectedChat != null)
-            {
-                model.SendMessage(view.SelectedChat, view.Message());
-            }
-            else
-            {
-                MessageBox.Show("You have to choose chat!");
-            }
+            model.SendMessage(view.SelectedChat, view.Message());
+        }
+        public void OnDeleteChat()
+        {
+            model.DeleteChat(view.SelectedChat);
+            view.LoadChats(model.user.MyChats());
+            view.LoadMessages(null);
         }
         
     }
