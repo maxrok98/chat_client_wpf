@@ -109,7 +109,6 @@
     <Compile Include="SqlMachine.cs" />
     <Compile Include="User\Chat.cs" />
     <Compile Include="User\EncryptedSend.cs" />
-    <Compile Include="User\Facade.cs" />
     <Compile Include="User\ISend.cs" />
     <Compile Include="User\IUser.cs" />
     <Compile Include="User\MainUser.cs" />
@@ -117,7 +116,6 @@
     <Compile Include="User\Model.cs" />
     <Compile Include="User\Presenter.cs" />
     <Compile Include="User\SimpleSend.cs" />
-    <Compile Include="User\SocketIOSystem.cs" />
     <Compile Include="User\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
