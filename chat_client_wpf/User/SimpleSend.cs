@@ -5,15 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Quobject.SocketIoClientDotNet.Client;
 using Newtonsoft.Json;
+using System.Configuration;
 
 namespace chat_client_wpf.User
 {
     public class SimpleSend : ISend
     {
-        void ISend.send(Socket socket, ForSend message)
+        public SocketIOSystem system;
+        public SimpleSend(SocketIOSystem s)
+        {
+            system = s;
+        }
+        void ISend.send(ForSend message)
         {
             string json = JsonConvert.SerializeObject(message);
-            socket.Emit("send message", json);
+            system.send(json);
         }
+
     }
 }

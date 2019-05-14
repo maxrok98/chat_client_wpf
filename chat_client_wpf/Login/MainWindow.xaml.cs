@@ -41,7 +41,7 @@ namespace chat_client_wpf.Login
         public void CreateUserForm(int n)
         {
             user = new User.User();
-            usermodel = new User.Model(n, new User.SimpleSend());
+            usermodel = new User.Model(n);
             userpresenter = new User.Presenter(user, usermodel);
             user.Show();
         }

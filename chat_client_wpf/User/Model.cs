@@ -21,10 +21,23 @@ namespace chat_client_wpf.User
         public SqlMachine sql = SqlMachine.getInstance();
         int n = 0;
         ISend typesend;
-        public Model(int n, ISend send)
+        Facade facade;
+        public Model(int n)
         {
-            this.typesend = send;
+            
+            facade = new Facade(new SocketIOSystem());
+            typesend = new SimpleSend(facade.system1);
             this.n = n;
+
+            InitMainUser();
+            
+            UpdateMyChat();
+            facade.system1.ReceiveMessageFromSocket += OnReceiveMessageFromSocket;
+            facade.RunSystem1();
+            
+        }
+        public void InitMainUser()
+        {
             DataSet ds = sql.SqlQuerySelect($"select username from users where id = '{n}'");
             string name = "";
             foreach (DataTable dt in ds.Tables)
@@ -35,10 +48,22 @@ namespace chat_client_wpf.User
                 }
             }
             user = new MainUser(n, name);
-            UpdateMyChat();
-            SocketIOManager();
         }
-        public void SocketIOManager()
+        public void OnReceiveMessageFromSocket()
+        {
+            ForReceive f = facade.system1.forReceive;
+            if(f.chat_id == chat.Id)
+            {
+                message = new Message(f.user, f.text, false);
+
+                if (f.user_id == user.Id)
+                {
+                    message.MainUser = true;
+                }
+                ReceiveMessage();
+            }
+        }
+        /*public void SocketIOManager()
         {
             socket.On(Socket.EVENT_CONNECT, () =>
             {
@@ -62,7 +87,7 @@ namespace chat_client_wpf.User
                     ReceiveMessage(); 
                 }
             });
-        }
+        }*/
         public void UpdateMyChat()
         {
             user.mychat = new List<Chat>();
@@ -166,7 +191,7 @@ namespace chat_client_wpf.User
             f.user = user.Username;
             f.chat_id = chat.Id;
             f.text = text;
-            typesend.send(socket, f);
+            typesend.send(f);
         }
         
 

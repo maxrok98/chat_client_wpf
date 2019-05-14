@@ -9,7 +9,7 @@ namespace chat_client_wpf.User
 {
     class EncryptedSend : ISend
     {
-        public void send(Socket socket, ForSend message)
+        public void send(ForSend message)
         {
             //Encrypted sending
         }

@@ -9,6 +9,6 @@ namespace chat_client_wpf.User
 {
     public interface ISend
     {
-        void send(Socket socket, ForSend message);
+        void send(ForSend message);
     }
 }
