@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace chat_client_wpf.User
 {
-    public class Message : Component
+    public class DecorName : Decorator
     {
-
-        public Message() {
-            this.MainUser = false;
+        public static void DecorN(Component component, string name)
+        {
+            component.Name = name;
         }
     }
 }

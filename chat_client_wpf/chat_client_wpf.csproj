@@ -108,6 +108,11 @@
     </Compile>
     <Compile Include="SqlMachine.cs" />
     <Compile Include="User\Chat.cs" />
+    <Compile Include="User\Component.cs" />
+    <Compile Include="User\Decorator.cs" />
+    <Compile Include="User\DecorDescription.cs" />
+    <Compile Include="User\DecorMainUser.cs" />
+    <Compile Include="User\DecorName.cs" />
     <Compile Include="User\EncryptedSend.cs" />
     <Compile Include="User\ISend.cs" />
     <Compile Include="User\IUser.cs" />

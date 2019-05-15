@@ -53,11 +53,15 @@ namespace chat_client_wpf.User
                 ForReceive f = JsonConvert.DeserializeObject<ForReceive>(d);
                 if(f.chat_id == chat.Id)
                 {
-                    message = new Message(f.user, f.text, false);
+                    //message = new Message(f.user, f.text, false);
+                    message = new Message();
+                    DecorName.DecorN(message, f.user);
+                    DecorDescription.DecorDesc(message, f.text);
+
 
                     if(f.user_id == user.Id)
                     {
-                        message.MainUser = true;
+                        DecorMainUser.DecorMainU(message);
                     }
                     ReceiveMessage(); 
                 }
@@ -144,9 +148,21 @@ namespace chat_client_wpf.User
                     {
                         Message message;
                         if (Convert.ToInt32(row[1]) == user.Id)
-                            message = new Message(user.Username, Convert.ToString(row[2]), true);
+                        {
+                            //message = new Message(user.Username, Convert.ToString(row[2]), true);
+                            message = new Message();
+                            DecorName.DecorN(message, user.Username);
+                            DecorDescription.DecorDesc(message, Convert.ToString(row[2]));
+                            DecorMainUser.DecorMainU(message);
+                        }
                         else
-                            message = new Message(OtherUserName, Convert.ToString(row[2]), false);
+                        {
+                            //message = new Message(OtherUserName, Convert.ToString(row[2]), false);
+                            message = new Message();
+                            DecorName.DecorN(message, OtherUserName);
+                            DecorDescription.DecorDesc(message, Convert.ToString(row[2]));
+                            
+                        }
                         user.Messages.Add(message);
                     }
                 }

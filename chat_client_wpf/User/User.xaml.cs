@@ -88,6 +88,7 @@ namespace chat_client_wpf.User
             if (CreateNewChat != null)
                 CreateNewChat();
             LoadChats(null);
+            UpdateU();
         }
 
         private void ChatsList_Selected(object sender, RoutedEventArgs e)

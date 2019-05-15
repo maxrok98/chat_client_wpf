@@ -36,23 +36,9 @@
         </Style>
     </Window.Resources>-->
     <materialDesign:DialogHost CloseOnClickAway="True">
-        <materialDesign:DialogHost.DialogContent>
-            <StackPanel Margin="20">
-                <Label Content="Create new chat"
-                       FontSize="20" />
-                <TextBlock Text="Name of chat" />
-                <TextBox Margin="10"
-                         Width="150"
-                         Name="NewChat" />
-                <TextBlock Text="Name of user" />
-                <TextBox Margin="10"
-                         Width="150"
-                         Name="UserForNewChat" />
+        
 
-                <Button Content="Create"
-                        Click="Button_Click" />
-            </StackPanel>
-        </materialDesign:DialogHost.DialogContent>
+        
 
         <Grid>
             <Grid.RowDefinitions>
@@ -74,14 +60,19 @@
                                              PlacementMode="BottomAndAlignRightEdges">
                         <ListBox>
                             <ListBoxItem>
-                                Hello World
+                                <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        
+                                        Width="128">
+                                    <Button.CommandParameter>
+                                        <StackPanel Margin="16">
+                                            <Label Content="Developed by Rokochyi Maksym" FontSize="20"></Label>
+                                            <materialDesign:PackIcon Kind="Smiley" HorizontalAlignment="Center"></materialDesign:PackIcon>
+                                        </StackPanel>
+                                    </Button.CommandParameter>
+                                    About developer
+                                </Button>
                             </ListBoxItem>
-                            <ListBoxItem>
-                                Nice Popup
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                Goodbye.
-                            </ListBoxItem>
+                            
                         </ListBox>
                     </materialDesign:PopupBox>
                     <StackPanel Orientation="Vertical">
@@ -137,17 +128,31 @@
                             
                         </Button>
                         
-                        <Button ToolTip="Add an item"
+                        <Button ToolTip="Add a chat"
                                 Background="#FB8C00"
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                            <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                                  Stretch="Uniform"
-                                  Width="15"
-                                  Height="15"
-                                  Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" />
+                            <Button.CommandParameter>
+                                <StackPanel Margin="20">
+                                    <Label Content="Create new chat"
+                                           FontSize="20" />
+                                    <TextBlock Text="Name of chat" />
+                                    <TextBox Margin="10"
+                                             Width="150"
+                                             Name="NewChat" />
+                                    <TextBlock Text="Name of user" />
+                                    <TextBox Margin="10"
+                                             Width="150"
+                                             Name="UserForNewChat" />
+
+                                    <Button Content="Create"
+                                            Background="Yellow"
+                                            Click="Button_Click" />
+                                </StackPanel>
+                            </Button.CommandParameter>
+                            <materialDesign:PackIcon Kind="Add" />
                         </Button>
                         <Button Background="#FB8C00"
-                                ToolTip="Remove selected item"
+                                ToolTip="Remove selected chat"
                                 Name="Delete"
                                 Click="Delete_Click">
                             <Path Data="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
@@ -314,4 +319,5 @@
             </DockPanel>-->
         </Grid>
     </materialDesign:DialogHost>
+    
 </Window>

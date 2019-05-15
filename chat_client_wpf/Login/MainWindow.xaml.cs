@@ -44,13 +44,14 @@ namespace chat_client_wpf.Login
             usermodel = new User.Model(n, new User.SimpleSend());
             userpresenter = new User.Presenter(user, usermodel);
             user.Show();
+            this.Hide();
         }
 
         public string[] LoadUser()
         {
             string[] mas = new string[2];
             mas[0] = this.textBox1.Text;
-            mas[1] = this.textBox2.Text;
+            mas[1] = this.textBox2.Password;
             return mas;
         }
 

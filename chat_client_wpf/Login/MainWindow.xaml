@@ -44,7 +44,7 @@
         <TextBlock Text=":"
                    Grid.Row="2" Grid.Column="1"
                    HorizontalAlignment="Center"/>
-        <TextBox Margin="0 2" Name="textBox2"
+        <PasswordBox Margin="0 2" Name="textBox2"
                  Grid.Row="2" Grid.Column="2"/>
 
 
